@@ -30,14 +30,25 @@ namespace iterations
             // |-------FACTORIAL ASTERIX TRIANGLE--------|
             // *-----------------------------------------*
             var userNumber = Helper.InputNumber();
-            for (int i = 1; i <= userNumber; i++)
+            int factorialOfPreviousStep = Factorial.calculateFactorial(userNumber);
+            int previousMargin = 0;
+            for (int i = userNumber; i >= 1; i--)
             {
                 var factorialOfTheStep = Factorial.calculateFactorial(i);
                 Console.Write($"\n{factorialOfTheStep}\t-> ");
+                int diff = factorialOfPreviousStep - factorialOfTheStep;
+                int margin = (int)Math.Ceiling((decimal)(diff / 2m));
+
+                for (int s = 0; s < previousMargin + margin; s++)
+                {
+                    Console.Write(" ");
+                }
                 for (int x = 0; x < factorialOfTheStep; x++)
                 {
                     Console.Write("*");
                 }
+                factorialOfPreviousStep = factorialOfTheStep;
+                previousMargin += margin;
             }
         }
     }
